@@ -1,3 +1,4 @@
+import requests
 def send_request(data, webhook_url:str, timeout:int):
     import requests
     resp = requests.post("webhook_url",
