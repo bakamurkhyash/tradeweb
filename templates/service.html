@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title id="page-title">Service Details | PatilTrades</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        /* Reuse your existing global styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --light-gray: #e2e8f0;
+            --success: #10b981;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--secondary);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .service-header {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .service-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        .service-content h2 {
+            margin: 30px 0 15px;
+            color: var(--secondary);
+        }
+        .service-content p {
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+        .pricing {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 25px 0;
+        }
+        .pricing h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .price-list {
+            list-style: none;
+        }
+        .price-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+        }
+        .price-list li:last-child {
+            border: none;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: var(--transition);
+        }
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="service-header">
+            <div class="service-icon" id="service-icon">
+                <i class="fas fa-tools"></i>
+            </div>
+            <h1 id="service-title">Service Details</h1>
+        </div>
+
+        <div class="service-content" id="service-content">
+            <!-- Content will be injected here -->
+        </div>
+
+        <div class="pricing" id="pricing-section">
+            <h3>Pricing (INR)</h3>
+            <ul class="price-list" id="price-list">
+                <!-- Pricing will be injected -->
+            </ul>
+        </div>
+
+        <a href="https://n8n-jrp7.onrender.com/form/5e4963b0-bae5-4027-b3b5-2076b460c4ed" class="btn">
+            Get a Free Quote
+        </a>
+    </main>
+
+    <script>
+        // Service data mapping
+        const serviceData = {
+            construction: {
+                title: "Construction Services",
+                icon: "fa-building",
+                description: "Our construction experts handle everything from residential homes to commercial complexes. We ensure structural integrity, timely delivery, and compliance with local regulations.",
+                expertise: [
+                    "Foundation & Framing",
+                    "Roofing & Flooring",
+                    "Interior Finishing",
+                    "Project Management",
+                    "Site Supervision"
+                ],
+                pricing: [
+                    { item: "Residential Home (1000 sq.ft)", price: "₹18,00,000 – ₹25,00,000" },
+                    { item: "Commercial Office Setup", price: "₹30,00,000+" },
+                    { item: "Renovation (per sq.ft)", price: "₹1,200 – ₹2,500" },
+                    { item: "Consultation & Planning", price: "₹10,000 – ₹25,000" }
+                ]
+            },
+            plumbing: {
+                title: "Plumbing Services",
+                icon: "fa-wrench",
+                description: "From leak repairs to full-system installations, our certified plumbers deliver reliable, long-lasting solutions for homes and businesses—available 24/7 for emergencies.",
+                expertise: [
+                    "Pipe Installation & Repair",
+                    "Water Heater Services",
+                    "Drain Cleaning",
+                    "Fixture Installation",
+                    "Sewage System Maintenance"
+                ],
+                pricing: [
+                    { item: "Minor Leak Repair", price: "₹500 – ₹1,500" },
+                    { item: "Full Bathroom Plumbing", price: "₹25,000 – ₹45,000" },
+                    { item: "Water Heater Installation", price: "₹8,000 – ₹15,000" },
+                    { item: "24/7 Emergency Call", price: "₹1,000 (service fee)" }
+                ]
+            },
+            painting: {
+                title: "Painting Services",
+                description: "Transform your space with flawless interior and exterior painting using premium, eco-friendly paints and meticulous surface preparation.",
+                icon: "fa-paint-roller",
+                expertise: [
+                    "Interior Wall Painting",
+                    "Exterior Weatherproof Coating",
+                    "Texture & False Ceiling Finishes",
+                    "Wood & Metal Painting",
+                    "Color Consultation"
+                ],
+                pricing: [
+                    { item: "Interior Painting (per sq.ft)", price: "₹12 – ₹25" },
+                    { item: "Exterior Painting (per sq.ft)", price: "₹18 – ₹35" },
+                    { item: "2BHK Apartment (Full)", price: "₹25,000 – ₹40,000" },
+                    { item: "Premium Texture Finish", price: "₹40 – ₹70 per sq.ft" }
+                ]
+            },
+            fabrication: {
+                title: "Metal Fabrication",
+                description: "Custom metalwork for residential railings, industrial structures, gates, and more—crafted with precision welding and durable materials.",
+                icon: "fa-industry",
+                expertise: [
+                    "Custom Gates & Railings",
+                    "Structural Steelwork",
+                    "Sheet Metal Fabrication",
+                    "Welding & Assembly",
+                    "Industrial Equipment Frames"
+                ],
+                pricing: [
+                    { item: "Staircase Railing (per ft)", price: "₹800 – ₹1,800" },
+                    { item: "Main Gate (Standard)", price: "₹25,000 – ₹60,000" },
+                    { item: "Custom Shelves (per unit)", price: "₹3,000 – ₹8,000" },
+                    { item: "Industrial Frame (per kg)", price: "₹120 – ₹200" }
+                ]
+            }
+        };
+
+        // Get job type from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const job = urlParams.get('job') || 'construction'; // default fallback
+
+        // Validate job type
+        if (!serviceData[job]) {
+            document.getElementById('service-title').textContent = "Service Not Found";
+            document.getElementById('service-content').innerHTML = "<p>Sorry, we couldn't find details for this service.</p>";
+            document.querySelector('.pricing').style.display = 'none';
+            document.title = "Not Found | PatilTrades";
+        } else {
+            const data = serviceData[job];
+
+            // Update title and icon
+            document.getElementById('service-title').textContent = data.title;
+            document.getElementById('service-icon').innerHTML = `<i class="fas ${data.icon}"></i>`;
+            document.title = `${data.title} | PatilTrades`;
+
+            // Build content
+            let contentHTML = `<p>${data.description}</p>`;
+            contentHTML += `<h2>Our Expertise</h2><ul>`;
+            data.expertise.forEach(item => {
+                contentHTML += `<li>${item}</li>`;
+            });
+            contentHTML += `</ul>`;
+
+            document.getElementById('service-content').innerHTML = contentHTML;
+
+            // Build pricing
+            const priceList = document.getElementById('price-list');
+            priceList.innerHTML = '';
+            data.pricing.forEach(p => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${p.item}</span><strong>${p.price}</strong>`;
+                priceList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
