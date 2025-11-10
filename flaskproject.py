@@ -68,5 +68,13 @@ def form():
         timeout = 10
     )
 
+    resp.raise_for_status()
+    responses = resp.json()
+    try:
+        return {"status": resp.status_code, "json": resp.json(), "text": resp.text}
+            #in above line the 'resp.json()' contains the response from the 'respond to webhook' node
+    except ValueError:
+            return {"status": resp.status_code, "json": None, "text": resp.text}
+
 if __name__ == "__main__":
     app.run()

@@ -141,6 +141,66 @@
         </a>
     </main>
 
+    <!-- Service Inquiry Form -->
+<section class="section" id="inquiry">
+    <div class="container">
+        <div class="section-title">
+            <h2>Request a Service</h2>
+            <p>Fill in the form below and we’ll connect you with a qualified professional.</p>
+        </div>
+        <div style="max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: var(--shadow);">
+            <form id="service-inquiry-form" action="form" method="post">
+                <div style="margin-bottom: 20px;">
+                    <label for="service-type" style="display: block; margin-bottom: 8px; font-weight: 500; color: var(--secondary);">Service Type*</label>
+                    <select id="service-type" name="service" required style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                        <option value="">— Select a service —</option>
+                        <option value="construction">Construction</option>
+                        <option value="plumbing">Plumbing</option>
+                        <option value="painting">Painting</option>
+                        <option value="fabrication">Fabrication</option>
+                        <option value="electrical">Electrical</option>
+                        <option value="hvac">HVAC</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; margin-bottom: 8px; font-weight: 500;">Full Name*</label>
+                    <input type="text" id="name" name="name" required 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 8px; font-weight: 500;">Email*</label>
+                    <input type="email" id="email" name="email" required 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="phone" style="display: block; margin-bottom: 8px; font-weight: 500;">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="location" style="display: block; margin-bottom: 8px; font-weight: 500;">Location (City/Area)*</label>
+                    <input type="text" id="location" name="location" required 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="details" style="display: block; margin-bottom: 8px; font-weight: 500;">Project Details*</label>
+                    <textarea id="details" name="details" rows="4" required 
+                              style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif; resize: vertical;"></textarea>
+                </div>
+
+                <div style="text-align: center;">
+                    <button type="submit" class="btn" style="width: 100%; max-width: 250px;">Submit Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
     <script>
         // Service data mapping
         const serviceData = {
@@ -220,41 +280,44 @@
 
         // Get job type from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const job = urlParams.get('job') || 'construction'; // default fallback
+    const job = urlParams.get('job') || 'construction';
 
-        // Validate job type
-        if (!serviceData[job]) {
-            document.getElementById('service-title').textContent = "Service Not Found";
-            document.getElementById('service-content').innerHTML = "<p>Sorry, we couldn't find details for this service.</p>";
-            document.querySelector('.pricing').style.display = 'none';
-            document.title = "Not Found | PatilTrades";
-        } else {
-            const data = serviceData[job];
+    // Validate job type
+    if (!serviceData[job]) {
+        document.getElementById('service-title').textContent = "Service Not Found";
+        document.getElementById('service-content').innerHTML = "<p>Sorry, we couldn't find details for this service.</p>";
+        document.querySelector('.pricing').style.display = 'none';
+        document.title = "Not Found | PatilTrades";
+    } else {
+        const data = serviceData[job];
 
-            // Update title and icon
             document.getElementById('service-title').textContent = data.title;
-            document.getElementById('service-icon').innerHTML = `<i class="fas ${data.icon}"></i>`;
-            document.title = `${data.title} | PatilTrades`;
+        document.getElementById('service-icon').innerHTML = `<i class="fas ${data.icon}"></i>`;
+        document.title = `${data.title} | PatilTrades`;
 
-            // Build content
-            let contentHTML = `<p>${data.description}</p>`;
-            contentHTML += `<h2>Our Expertise</h2><ul>`;
-            data.expertise.forEach(item => {
-                contentHTML += `<li>${item}</li>`;
-            });
-            contentHTML += `</ul>`;
+        // Build content
+        let contentHTML = `<p>${data.description}</p>`;
+        contentHTML += `<h2>Our Expertise</h2><ul>`;
+        data.expertise.forEach(item => {
+            contentHTML += `<li>${item}</li>`;
+        });
+        contentHTML += `</ul>`;
+        document.getElementById('service-content').innerHTML = contentHTML;
 
-            document.getElementById('service-content').innerHTML = contentHTML;
-
-            // Build pricing
             const priceList = document.getElementById('price-list');
-            priceList.innerHTML = '';
-            data.pricing.forEach(p => {
-                const li = document.createElement('li');
-                li.innerHTML = `<span>${p.item}</span><strong>${p.price}</strong>`;
-                priceList.appendChild(li);
-            });
+        priceList.innerHTML = '';
+        data.pricing.forEach(p => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span>${p.item}</span><strong>${p.price}</strong>`;
+            priceList.appendChild(li);
+        });
+
+        // ✅ AUTO-SELECT SERVICE IN FORM DROPDOWN
+        const serviceSelect = document.getElementById('service-type');
+        if (serviceSelect) {
+            serviceSelect.value = job;  // e.g. 'plumbing' → selects "Plumbing"
         }
+    }
     </script>
 </body>
 </html>
