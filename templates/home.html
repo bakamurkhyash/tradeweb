@@ -9,16 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
     /* Compact, fixed chat window */
-    #n8n-chat-wrap {
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      width: 360px;
-      height: 520px;
-      max-width: 90vw;
-      max-height: 75vh;
-      z-index: 9999;
-    }
+/* Fix: Prevent chat wrapper from blocking clicks underneath */
+#n8n-chat-wrap {
+  pointer-events: none !important; /* Let clicks pass through wrapper */
+}
+
+/* But allow pointer events INSIDE the actual chat UI */
+#n8n-chat-wrap n8n-chat,
+#n8n-chat-wrap n8n-chat-widget,
+#n8n-chat-wrap .n8n-chat-launcher,
+#n8n-chat-wrap iframe,
+#n8n-chat-wrap * {
+  pointer-events: auto !important;
+}
     /* Force the widget to fill our wrap */
     n8n-chat, n8n-chat-widget {
       width: 100% !important;
@@ -233,9 +236,10 @@
 
         /* Make service cards clickable */
         .service-card-link {
+            z-index: 999;
             text-decoration: none;
             color: inherit;
-            display: block;
+            display:contents;
             height: 100%;
         }
 
@@ -722,6 +726,66 @@
         </div>
     </section>
 
+    <!-- Service Inquiry Form -->
+<section class="section" id="inquiry">
+    <div class="container">
+        <div class="section-title">
+            <h2>Request a Service</h2>
+            <p>Fill in the form below and we’ll connect you with a qualified professional.</p>
+        </div>
+        <div style="max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: var(--shadow);">
+            <form id="service-inquiry-form" action="form" method="post">
+                <div style="margin-bottom: 20px;">
+                    <label for="service-type" style="display: block; margin-bottom: 8px; font-weight: 500; color: var(--secondary);">Service Type*</label>
+                    <select id="service-type" name="service" required style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                        <option value="">— Select a service —</option>
+                        <option value="construction">Construction</option>
+                        <option value="plumbing">Plumbing</option>
+                        <option value="painting">Painting</option>
+                        <option value="fabrication">Fabrication</option>
+                        <option value="electrical">Electrical</option>
+                        <option value="hvac">HVAC</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; margin-bottom: 8px; font-weight: 500;">Full Name*</label>
+                    <input type="text" id="name" name="name" required 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 8px; font-weight: 500;">Email*</label>
+                    <input type="email" id="email" name="email" required 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="phone" style="display: block; margin-bottom: 8px; font-weight: 500;">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="location" style="display: block; margin-bottom: 8px; font-weight: 500;">Location (City/Area)*</label>
+                    <input type="text" id="location" name="location" required 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="details" style="display: block; margin-bottom: 8px; font-weight: 500;">Project Details*</label>
+                    <textarea id="details" name="details" rows="4" required 
+                              style="width: 100%; padding: 12px; border: 1px solid var(--light-gray); border-radius: 8px; font-family: 'Poppins', sans-serif; resize: vertical;"></textarea>
+                </div>
+
+                <div style="text-align: center;">
+                    <button type="submit" class="btn" style="width: 100%; max-width: 250px;">Submit Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
     <!-- How It Works -->
     <section class="section how-it-works" id="how-it-works">
         <div class="container">
@@ -753,6 +817,7 @@
             </div>
         </div>
     </section>
+    
 
     <!-- Testimonials -->
     <section class="section testimonials" id="testimonials">

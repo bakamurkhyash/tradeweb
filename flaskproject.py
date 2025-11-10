@@ -23,10 +23,13 @@ def delivery():
 def submit():
     if request.method == "POST":
         data = request.form.to_dict(flat=True)
-        resp = requests.post("https://n8n-jrp7.onrender.com/webhook-test/1240a920-f11e-497a-a017-135438fc2d80",
-                             json = data,
-                             headers = {"Content-type": "application/json"},
-                              timeout = 10)
+        resp = requests.post(
+            "https://n8n-jrp7.onrender.com/webhook-test/1240a920-f11e-497a-a017-135438fc2d80",
+            json = data,
+            headers = {"Content-type": "application/json"},
+            timeout = 10
+        )
+        
         resp.raise_for_status()
         responses = resp.json()
         try:
@@ -47,13 +50,23 @@ def file():
     }
 
     resp = requests.post(
-        "https://n8n-jrp7.onrender.com/webhook-test/1240a920-f11e-497a-a017-135438fc2d80",
+        "https://n8n-ytxn.onrender.com/webhook/3b24113e-a5ca-4ebc-a76d-f6241e613cec",
         files = files,
         data = data,
         timeout = 60
     )
 
     return jsonify({"status": resp.status_code, "text": resp.text}), resp.status_code
+
+@app.post("/form")
+def form():
+    data = request.form.to_dict(flat = True)
+    resp = requests.post(
+        "https://n8n-ytxn.onrender.com/webhook/3b24113e-a5ca-4ebc-a76d-f6241e613cec",
+        json = data,
+        headers = {"Content-type": "application/json"},
+        timeout = 10
+    )
 
 if __name__ == "__main__":
     app.run()
