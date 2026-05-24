@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, url_for, request, jsonify
+nofrom flask import Flask, redirect, render_template, url_for, request, jsonify
 from werkzeug.utils import secure_filename
 import requests 
 import sqlite3
@@ -72,7 +72,7 @@ def form():
     responses = resp.json()
     try:
         return {"status": resp.status_code, "json": resp.json(), "text": resp.text}
-            #in above line the 'resp.json()' contains the response from the 'respond to webhook' node
+            
     except ValueError:
             return {"status": resp.status_code, "json": None, "text": resp.text}
 
